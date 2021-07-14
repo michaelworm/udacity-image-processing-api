@@ -1,0 +1,40 @@
+{
+  "name": "udacity-image-processing-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run lint && npx tsc",
+    "start": "nodemon src/index.ts",
+    "start_build": "node dist/.",
+    "test": "jasmine",
+    "lint": "eslint './src/index.ts'",
+    "prettier": "prettier --config .prettierrc './src/**/*.ts' --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelworm/udacity-image-processing-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelworm/udacity-image-processing-api/issues"
+  },
+  "homepage": "https://github.com/michaelworm/udacity-image-processing-api#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jasmine": "^3.8.0",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sharp": "^0.28.3"
+  }
+}
