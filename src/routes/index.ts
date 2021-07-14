@@ -1,8 +1,8 @@
-import express from "express"
+import { Router, Request, Response, NextFunction } from "express"
 
-const routes = express.Router()
+const routes = Router()
 
-routes.get("/", (req: express.Request, res: express.Response, next: express.NextFunction): void => {
+routes.get("/", (req: Request, res: Response, next: NextFunction): void => {
   res.send("hello")
   next()
 })

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/michaelworm/udacity-image-processing-api#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/node": "^16.3.2",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
