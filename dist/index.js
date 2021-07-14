@@ -7,3 +7,4 @@ var express_1 = __importDefault(require("express"));
 var routes_1 = __importDefault(require("./routes"));
 var app = express_1.default();
 app.use("/", routes_1.default);
+app.listen(3000, function () { return console.log("Server is running on http://localhost:3000"); });
