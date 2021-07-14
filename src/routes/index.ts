@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express"
+import processImage from "../middlewares"
 
 const routes = Router()
 
@@ -7,9 +8,6 @@ routes.get("/", (req: Request, res: Response, next: NextFunction): void => {
   next()
 })
 
-routes.get("/api/images", (req: Request, res: Response, next: NextFunction): void => {
-  res.send(`Welcome!`)
-  next()
-})
+routes.get("/api/images", processImage)
 
 export default routes
