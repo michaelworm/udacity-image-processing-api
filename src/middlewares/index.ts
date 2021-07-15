@@ -12,15 +12,15 @@ export default async function processImage(req: Request, res: Response, next: Ne
 
   const thumbnail = path.join(process.env.IMAGE_DIR as string, "thumbnails", filename as string)
 
-  await imageProcessor(thumbnail, filename as string, width as string, height as string)
+  const file = await imageProcessor(thumbnail, filename as string, width as string, height as string)
 
-  res.sendFile(thumbnail, (err: Errback) => {
+  res.sendFile(file as string, (err: Errback) => {
     if (err) {
       console.log(err)
 
-      res.send(`There was an error showing the image ${thumbnail}`)
+      res.send(`There was an error showing the image ${file}`)
     } else {
-      console.log(`... show thumbnail ${filename}`)
+      console.log(`... show thumbnail ${file}`)
 
       next()
     }

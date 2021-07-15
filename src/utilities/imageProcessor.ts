@@ -2,16 +2,24 @@ import { promises as fsPromise } from "fs"
 import path from "path"
 import sharp from "sharp"
 
+function getFilenameWithDimension(filename: string, width: string, height: string): string {
+  return filename.split(".")[0] + `_${width}x${height}.jpg`
+}
+
 export default async function imageProcessor(
   thumbnail: string,
   filename: string,
   width: string,
   height: string
 ): Promise<boolean | string> {
-  try {
-    await fsPromise.access(thumbnail)
+  const fileWidth = parseInt(width, 10)
+  const fileHeight = parseInt(height, 10)
+  const filenameWithPath = getFilenameWithDimension(thumbnail, width, height)
 
-    return thumbnail
+  try {
+    await fsPromise.access(filenameWithPath)
+
+    return filenameWithPath
   } catch (e) {
     console.log(`... generating new thumbnail ${filename}`)
 
@@ -19,14 +27,16 @@ export default async function imageProcessor(
 
     try {
       const bufferFile = await fsPromise.readFile(file)
-      const fileWidth = parseInt(width, 10)
-      const fileHeight = parseInt(height, 10)
+      const newFilenameWithPath = getFilenameWithDimension(filename, width, height)
 
-      await sharp(bufferFile).resize(fileWidth, fileHeight).toFile(thumbnail)
+      await sharp(bufferFile)
+        .resize(fileWidth, fileHeight)
+        .toFile(path.join(process.env.IMAGE_DIR as string, "thumbnails", newFilenameWithPath))
+
+      return filenameWithPath
     } catch (e) {
+      console.log(e)
       return false
     }
-
-    return true
   }
 }
