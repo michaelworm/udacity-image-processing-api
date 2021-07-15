@@ -12,9 +12,16 @@ export default async function imageProcessor(
   width: string,
   height: string
 ): Promise<boolean | string> {
-  const fileWidth = parseInt(width, 10)
-  const fileHeight = parseInt(height, 10)
   const filenameWithPath = getFilenameWithDimension(thumbnail, width, height)
+  let fileWidth, fileHeight
+
+  try {
+    fileWidth = parseInt(width, 10)
+    fileHeight = parseInt(height, 10)
+  } catch (e) {
+    console.log(e)
+    return false
+  }
 
   try {
     await fsPromise.access(filenameWithPath)
