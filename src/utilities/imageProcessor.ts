@@ -16,11 +16,16 @@ export default async function imageProcessor(
     console.log(`... generating new thumbnail ${filename}`)
 
     const file = path.join(process.env.IMAGE_DIR as string, filename)
-    const bufferFile = await fsPromise.readFile(file)
-    const fileWidth = parseInt(width, 10)
-    const fileHeight = parseInt(height, 10)
 
-    await sharp(bufferFile).resize(fileWidth, fileHeight).toFile(thumbnail)
+    try {
+      const bufferFile = await fsPromise.readFile(file)
+      const fileWidth = parseInt(width, 10)
+      const fileHeight = parseInt(height, 10)
+
+      await sharp(bufferFile).resize(fileWidth, fileHeight).toFile(thumbnail)
+    } catch (e) {
+      return false
+    }
 
     return true
   }
