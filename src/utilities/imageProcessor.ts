@@ -7,11 +7,11 @@ export default async function imageProcessor(
   filename: string,
   width: string,
   height: string
-): Promise<boolean> {
+): Promise<boolean | string> {
   try {
     await fsPromise.access(thumbnail)
 
-    return true
+    return thumbnail
   } catch (e) {
     console.log(`... generating new thumbnail ${filename}`)
 
